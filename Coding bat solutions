@@ -1,0 +1,127 @@
+//Return true if the given string contains a "bob" string, but where the middle 'o' char can be any char.
+public boolean bobThere(String str) {
+  int len= str.length();
+  for (int i=0;i<len-2;i++)
+  {
+    if(str.charAt(i)=='b' && str.charAt(i+2)=='b')
+    return true;
+  }
+  return false;
+}
+
+
+//Given two strings, word and a separator sep, return a big string made of count occurrences of the word, separated by the separator string.
+public String repeatSeparator(String word, String sep, int count) {
+  String newword = "";
+  for (int i=0;i<count;i++)
+  {
+    if (i<count-1)
+      newword +=word+ sep;
+    else
+      newword +=word;
+  }
+  return newword;
+}
+
+
+//Given a string and an int n, return a string made of n repetitions of the last n characters of the string. You may assume that n is between 0 and the length of the string, inclusive.
+public String repeatEnd(String str, int n) {
+  int len=str.length();
+  String repeatword ="";
+  for (int i=0;i<n;i++)
+  {
+    repeatword += str.substring(len-n,len);
+  }
+  return repeatword;
+}
+
+//We'll say that a "triple" in a string is a char appearing three times in a row. Return the number of triples in the given string. The triples may overlap.
+public int countTriple(String str) {
+  int len=str.length();
+  int count=0;
+  for (int i=0; i<len-2;i++)
+  {
+    char tmp=str.charAt(i);
+    if(tmp==str.charAt(i+1)&&tmp==str.charAt(i+2))
+    count++;
+  }
+  return count;
+}
+
+//We'll say that a lowercase 'g' in a string is "happy" if there is another 'g' immediately to its left or right. Return true if all the g's in the given string are happy.
+public boolean gHappy(String str) {
+  int len=str.length();
+  boolean happy=true;
+  for(int i=0;i<len;i++)
+  {
+    if(str.charAt(i)=='g')
+    {
+    if(i>0 && str.charAt(i-1)=='g')  
+     happy=true;
+    else if (i<len-1 && str.charAt(i+1)=='g')
+      happy=true;
+    else
+      happy=false;
+   }
+ }
+ return happy;
+}
+
+//Given a string, return the length of the largest "block" in the string. A block is a run of adjacent chars that are the same.
+public int maxBlock(String str) {
+  int len=str.length();
+  int count=0;
+  int tmpcount=1;
+  if(len==0)
+  return 0;
+  for (int i=0;i<len;i++)
+  {
+    if(i<len-1 && str.charAt(i)==str.charAt(i+1))
+    tmpcount++;
+    else
+    tmpcount=1;
+    if(tmpcount>count)
+    count=tmpcount;
+  }
+  return count;
+}
+
+//
+Given an array of ints, return true if the array contains no 1's and no 3's.
+public boolean lucky13(int[] nums) {
+  boolean result=true;
+  for(int i=0;i<nums.length;i++)
+  if(nums[i]==1||nums[i]==3)
+  result=false;
+  return result;
+  
+}
+
+//
+Given a non-empty array of ints, return a new array containing the elements from the original array that come after the last 4 in the original array. The original array will contain at least one 4. Note that it is valid in java to create an array of length 0.
+public int[] post4(int[] nums) {
+  for (int i=nums.length-1;i>=0;i--)
+  {
+    if (nums[i]==4){
+      int[] foo;
+      foo=new int[nums.length-i-1];
+      for(int j=0;j<foo.length;j++){
+        foo[j]=nums[i+j+1];
+      }
+      return foo;
+    }
+  }
+  int[] bar ;
+  bar=new int[0];
+  return bar;
+}
+
+//Given a map of food keys and topping values, modify and return the map as follows: if the key "ice cream" is present, set its value to "cherry". In all cases, set the key "bread" to have the value "butter".
+public Map<String, String> topping1(Map<String, String> map) {
+  if (map.containsKey("ice cream")){
+    map.put("ice cream","cherry");
+    
+  }
+  map.put("bread","butter");
+  return map;
+}
