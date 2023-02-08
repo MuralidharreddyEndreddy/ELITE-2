@@ -1,0 +1,430 @@
+//Student normal
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+class Student{
+    private String name;
+    private int rollno;
+    private String branch;
+    private int year;
+    private List<Integer>marks;
+    private static int accNoOfStudents;
+    public Student (String name,int rollno,String branch,int year){
+        this.name=name;
+        this.rollno=rollno;
+        this.branch=branch;
+        this.year=year;
+        marks=new ArrayList<>();
+        accNoOfStudents++;
+    }
+    public String getName(){
+        return name;
+    }
+    public int getRollNo(){
+        return rollno;
+    }
+    public String getBranch(){
+        return branch;
+    }
+    public int getYear(){
+        return year;
+    }
+    public List<Integer>getMarks(){
+        return marks;
+    }
+    public void setName(String name){
+        this.name=name;
+    }
+    public void setMarks(int obMark){
+        marks.add(obMark);
+    }
+    public void display(){
+        System.out.println(rollno+" "+name+" "+branch+" "+year);
+    }
+    public double computePercentage(){
+        double sum=0;
+        for(Integer mark:marks){
+            sum+=mark;
+        }
+        if (marks.size()==0){
+            return 0;
+        }
+        else{
+            return sum/marks.size();
+        }
+    }
+    public static void displayNoStuds(){
+        System.out.println("NoOfStudents="+accNoOfStudents);
+    }
+    
+}
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n=Integer.parseInt(in.nextLine());
+        List<Student>list=new ArrayList<>();
+        for (int i=0; i<n;i++){
+            String [] line = in.nextLine().split(" ");
+            Student s= new Student(line[0],Integer.parseInt(line[1]),line[2],Integer.parseInt(line[3]));
+            list.add(s);
+            Student arr = list.get(i);
+            String [] nums = in.nextLine().split(" ");
+            for (int j=0;j<nums.length;j++){
+                arr.setMarks(Integer.parseInt(nums[j]));
+            }
+        }
+        for (int i=0;i<n;i++){
+            list.get(i).display();
+            Student s = list.get(i);
+            System.out.print(s.getRollNo()+" ");
+            System.out.printf("%.2f",s.computePercentage());
+            System.out.println();
+        }
+        Student.displayNoStuds();
+    }
+}
+
+
+
+//Bank Account
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+class BankAccount{
+    private String name;
+    private int accountNo;
+    private int balance;
+    public int accountNoTracker;
+    public BankAccount(String name,int balance){
+        this.name=name;
+        this.balance=0;
+        accountNoTracker++;
+    }
+    public String getName(){
+        return name;
+    }
+    public int getBalance(){
+        return balance;
+    }
+    public int getAccountNo(){
+        return accountNo;
+    }
+    public void setAccountNo(int dd){
+        accountNo=dd;
+    }
+    public void display(){
+        System.out.println(accountNo+" "+name+" "+balance);
+    }
+    public void deposit(int i){
+        balance=balance+i;
+    }
+    public void withdraw(int j){
+        if (balance<j){
+            System.out.println("Negative Balance Transaction Cancelled");
+        }
+        else{
+            balance=balance-j;
+        }
+    }
+}
+
+public class Solution {
+
+    public static void main(String[] args) {
+       Scanner in = new Scanner(System.in);
+        int a = in.nextInt();
+        in.nextLine();
+        String str=in.next();
+        int b=in.nextInt();
+        in.nextLine();
+        BankAccount d = new BankAccount(str,a);
+        d.setAccountNo(a);
+        for (int i=0;i<b;i++){
+            String[] arr =in.nextLine().split(" ");
+            if (arr[0].equals("Withdraw")){
+                d.withdraw(Integer.parseInt(arr[1]));
+            }
+            else if (arr[0].equals("Deposit")){
+                d.deposit(Integer.parseInt(arr[1]));
+            }
+            else if (arr[0].equals("Display")){
+                d.display();
+            }
+        }
+    }
+}
+
+
+
+//Class and Objects 9
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+class Person{
+    private int a;
+    public Person(int a){
+        this.a=a;
+    }
+    public int getAge(){
+        return a;
+    }
+    public void amIOld(){
+        if (a<13) {
+            System.out.println("You are young.");
+        }
+        else if (a>=13 && a<18){
+            System.out.println("You are a teenager.");
+        }
+        else{
+            System.out.println("You are old.");
+        }
+    }
+    public int yearPasses(){
+        if (a<0){
+            a=0;
+           }
+        else{
+            a+=1;
+        }
+        return a;
+    }
+}
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int D = scan.nextInt();
+        for(int i=0;i<D;i++){
+            int a= scan.nextInt();
+            if (a<0){
+                System.out.println("Age is not valid, setting age to 0.");
+            }
+            Person p =new Person(a);
+            p.amIOld();
+            for (int j=0;j<3;j++){
+                p.yearPasses();
+            }
+            p.amIOld();
+            System.out.println();
+        }
+        scan.close();
+    }
+}
+
+
+//custom Integer list
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+class IntegerList{
+    private int[] list;
+    private int index=0;
+    int size;
+    IntegerList(int size){
+        this.size=size;
+        list=new int[size];
+    }
+    public void add(int a){
+        if (index>=size){
+            System.out.println("can't add, list is full");
+        }
+        else {
+            list[index]=a;
+            index++;
+        }
+    }
+    public String toString(){
+        for (int i=0;i<size;i++){
+            System.out.println(i+" "+":"+" "+list[i]);
+        }
+        return "";
+    }                           
+}
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+        int capacity = Integer.parseInt(in.nextLine());
+        IntegerList nums = new IntegerList(capacity);
+        while(in.hasNextLine()){
+            int num = Integer.parseInt(in.nextLine());
+            nums.add(num);
+        }
+        System.out.println(nums);
+    }
+}
+
+
+//Dog inheritance 1
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+class Dog{
+    private String name;
+    Dog(String name){
+        this.name=name;
+    }
+    public String getName(){
+        return name;
+    }
+}
+class Greyhound extends Dog{
+    private String color;
+    private int weight;
+    Greyhound(String name,String color,int weight){
+        super (name);
+        this.color=color;
+        this.weight=weight;
+    }
+    public String getColor(){
+        return color;
+    }
+    public int getWeight(){
+        return weight;
+    }
+    public String toString(){
+        String result="";
+        result=result + getName()+" is "+ getColor() + " in color and his weight is " + getWeight()+"Kg";
+        return result;
+    }
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String name = in.nextLine();
+        String color = in.nextLine();
+        int weight = in.nextInt();
+        Greyhound pup = new Greyhound(name, color, weight);
+        System.out.println(pup.getName());
+        System.out.println(pup.getColor());
+        System.out.println(pup.getWeight());
+        System.out.println(pup);
+        System.out.println("Superclass:"+pup.getClass().getSuperclass().getName());
+        
+    }
+}
+
+
+
+//DistanceOOP
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+abstract class Distance {
+    protected int feet;
+    protected float inches;
+    
+    abstract public void setFeetAndInches(int feet, float inches);
+    abstract public int getFeet();
+    abstract public float getInches();
+    abstract String getDistanceComparison(Distance dist2);
+}
+class DistanceImplementation extends Distance{
+    public void setFeetAndInches(int feet, float inches){
+        this.feet=feet;
+        this.inches=inches;
+    }
+    public int getFeet(){
+        return feet;
+    }
+    public float getInches(){
+        return inches;
+    }
+    public String getDistanceComparison(Distance dist2){
+        if (feet*12+inches-(dist2.getFeet()*12+getInches())==0){
+            return "Both distances are equal.";
+        }
+        else if (feet*12+inches-(dist2.getFeet()*12+getInches())>0){
+            return "First distance is greater.";
+        }
+        else{
+            return "Second distance is greater.";
+        }
+    }
+}
+public class DistanceCalculator {
+    private static final Scanner scan = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+        Distance dist1 = new DistanceImplementation();
+        Distance dist2 = new DistanceImplementation();
+        
+        int feet1 = scan.nextInt();
+        float inches1 = scan.nextFloat();
+        
+        int feet2 = scan.nextInt();
+        float inches2 = scan.nextFloat();
+        
+        dist1.setFeetAndInches(feet1, inches1);
+        dist2.setFeetAndInches(feet2, inches2);
+        
+        System.out.println(dist1.getDistanceComparison(dist2));
+    }
+}
+
+
+//Custom sort object
+
+import java.io.*;
+
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        List<Candidate>  students = new ArrayList<Candidate>();
+        for(int i=0;i<n;i++){
+           String name = in.next();
+           int marks = in.nextInt();
+           students.add(new Candidate(name,marks));
+        }
+        Collections.sort(students);
+        for(Candidate student : students){
+            System.out.println(student.getName()+" "+student.getMark());
+        }
+    }
+}
+class Candidate implements Comparable<Candidate> {
+    private String name;
+    private int mark;
+    public Candidate(String name,int mark){
+        this.name=name;
+        this.mark=mark;
+    }
+    public String getName(){
+        return name;
+    }
+    public int getMark(){
+        return mark;
+    }
+    public int compareTo(Candidate tu){
+        return getMark()-tu.getMark();
+    }
+}
